@@ -1,0 +1,12 @@
+autoDiscovery:
+  clusterName: "kubeadm-cluster"
+
+awsRegion: "<AWS_REGION>" # Replace with your AWS region
+rbac:
+  create: true
+
+extraArgs:
+  skip-nodes-with-local-storage: false
+  expander: least-waste
+
+replicaCount: 1

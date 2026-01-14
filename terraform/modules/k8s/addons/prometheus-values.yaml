@@ -1,0 +1,24 @@
+alertmanager:
+  enabled: true
+  persistentVolume:
+    size: 5Gi
+    storageClass: "gp2"
+
+prometheus:
+  prometheusSpec:
+    replicas: 2
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "gp2"
+          resources:
+            requests:
+              storage: 10Gi
+
+grafana:
+  enabled: false  # Using separate Grafana release
+
+service:
+  type: NodePort
+  port: 9090
+  nodePort: 30090

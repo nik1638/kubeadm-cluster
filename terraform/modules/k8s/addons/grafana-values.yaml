@@ -1,0 +1,26 @@
+replicaCount: 2
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClassName: "gp2"
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+  targetPort: 3000
+
+ingress:
+  enabled: false
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - grafana
+        topologyKey: "kubernetes.io/hostname"

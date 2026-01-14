@@ -1,0 +1,8 @@
+replicaCount: 2
+
+args:
+  - --kubelet-insecure-tls
+  - --kubelet-preferred-address-types=InternalIP
+
+# Metrics server runs in kube-system namespace
+namespace: kube-system

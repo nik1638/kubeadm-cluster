@@ -1,0 +1,22 @@
+controller:
+  replicaCount: 2
+
+  serviceType: NodePort
+  servicePort: 8080
+  serviceNodePort: 30081
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
+
+  persistentVolumeClaim:
+    storageClassName: "gp2"
+    size: 10Gi
+
+agent:
+  enabled: true
+  replicas: 2
