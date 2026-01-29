@@ -69,7 +69,13 @@ done
 # ------------------------------
 # Join the cluster
 # ------------------------------
-$JOIN_CMD
+JOIN_CMD=$$(aws ssm get-parameter \
+  --name /k8s/join_command \
+  --query 'Parameter.Value' \
+  --output text \
+  --region ${AWS_REGION})
+bash -c "$$JOIN_CMD"
+
 
 # ------------------------------
 # Done

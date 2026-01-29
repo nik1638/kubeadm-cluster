@@ -1,8 +1,8 @@
-provider "helm" {
-  kubernetes {
-    config_path = "~/.kube/config"
-  }
-}
+# provider "helm" {
+#   kubernetes {
+#     config_path = "~/.kube/config"
+#   }
+# }
 
 ###############################
 # 1️⃣ Metrics Server
@@ -25,7 +25,11 @@ resource "helm_release" "cluster_autoscaler" {
   chart      = "cluster-autoscaler"
   namespace  = "kube-system"
 
-  values = [file("${path.module}/modules/k8s/addons/cluster-autoscaler.yaml")]
+  values = [
+    file("modules/k8s/addons/cluster-autoscaler.yaml")
+  ]
+
+
 
   set {
     name  = "autoDiscovery.clusterName"

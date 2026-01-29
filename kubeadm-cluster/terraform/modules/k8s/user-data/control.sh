@@ -1,4 +1,6 @@
 #!/bin/bash
+NODE_IP=$(hostname -I | awk '{print $1}')
+
 set -e
 
 # --- Variables from Terraform
@@ -61,7 +63,16 @@ chmod 600 /root/.kube/config
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # --- Store join command
-JOIN_CMD=$(kubeadm token create --print-join-command)
-aws ssm put-parameter --name "/k8s/join_command" --type String --value "$JOIN_CMD" --overwrite --region ${AWS_REGION}
+# JOIN_CMD=$(kubeadm token create --print-join-command)
+# aws ssm put-parameter --name "/k8s/join_command" --type String --value "$JOIN_CMD" --overwrite --region ${AWS_REGION}
 
-echo "Control plane setup complete."
+# echo "Control plane setup complete."
+
+JOIN_CMD=$$(kubeadm token create --print-join-command)
+aws ssm put-parameter \
+  --name /k8s/join_command \
+  --type String \
+  --value "$$JOIN_CMD" \
+  --overwrite \
+  --region ${AWS_REGION}
+

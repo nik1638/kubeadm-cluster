@@ -8,10 +8,6 @@ provider "helm" {
   }
 }
 
-module "vpc" {
-  source = "./modules/vpc"
-}
-
 module "k8s" {
   source = "./modules/k8s"
 }
