@@ -52,3 +52,4 @@ terraform.tfvars
 
 # Provider lock file (optional – usually KEEP this)
 # .terraform.lock.hcl
+ .terraform.lock.hcl
